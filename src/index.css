@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 346 77% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 346 77% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 346 77% 50%;
+
+    --radius: 0.75rem;
+
+    --surface: 0 0% 10%;
+    --surface-hover: 0 0% 14%;
+    --glow: 346 77% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(0 0% 4%);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(0 0% 20%);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(0 0% 30%);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8E2DE2] to-[#F63700];
+  }
+  .glass {
+    background: hsla(0, 0%, 10%, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .glass-border {
+    border: 1px solid hsla(0, 0%, 100%, 0.08);
+  }
+  .glow-primary {
+    box-shadow: 0 0 40px hsla(346, 77%, 50%, 0.2);
+  }
+  .gradient-fade-up {
+    background: linear-gradient(to top, hsl(0 0% 4%) 0%, transparent 100%);
+  }
+  .gradient-fade-right {
+    background: linear-gradient(to right, hsl(0 0% 4%) 0%, transparent 50%);
+  }
+
+  /* OTT Style Enhancements */
+  .logo-circular {
+    @apply rounded-full object-cover border-2 border-[#8E2DE2]/30;
+    box-shadow: 0 0 20px hsla(271, 76%, 53%, 0.4);
+  }
+
+  .glass-ott {
+    background: hsla(0, 0%, 10%, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .glow-purple-orange {
+    filter: drop-shadow(0 0 10px #8E2DE2) drop-shadow(0 0 20px #F63700);
+  }
+
+  /* Cinematic Projector Light Beam */
+  .projector-beam {
+    background: conic-gradient(from 180deg at 50% 0%, transparent 160deg, rgba(255, 255, 255, 0.05) 180deg, transparent 200deg);
+    pointer-events: none;
+  }
+
+  .cinematic-bg {
+    background: radial-gradient(circle at 50% -20%, #2a0a4a 0%, #050505 100%);
+    overflow: hidden;
+  }
+
+  .film-grain {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+    opacity: 0.15;
+    pointer-events: none;
+    animation: grain 8s steps(10) infinite;
+  }
+
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+  }
+
+  .light-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .light-sweep::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: sweep 3s infinite;
+  }
+
+  @keyframes sweep {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  .typewriter {
+    overflow: hidden;
+    border-right: .15em solid #F63700;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #F63700; }
+  }
+}
