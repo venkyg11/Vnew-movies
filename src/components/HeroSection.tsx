@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Info, Star, Clock } from "lucide-react";
+import { Play, Info, Star, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Movie } from "@/data/movies";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -51,7 +51,7 @@ const HeroSection = ({ movies }: HeroSectionProps) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 flex flex-col justify-center pt-20 pb-10">
+      <div className="absolute inset-0 flex flex-col justify-center pb-20 pt-10">
         <div className="px-4 md:px-12 lg:px-20 w-full max-w-[1440px] mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -73,7 +73,7 @@ const HeroSection = ({ movies }: HeroSectionProps) => {
                 )}
               </div>
 
-              <h1 className="font-display text-7xl md:text-9xl lg:text-[10rem] tracking-tighter text-foreground mb-4 leading-[0.8]">
+              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-tighter text-foreground mb-4 leading-[0.9]">
                 {movie.title}
               </h1>
 
@@ -115,16 +115,64 @@ const HeroSection = ({ movies }: HeroSectionProps) => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 right-10 flex gap-3">
-        {movies.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === current ? "w-12 bg-primary shadow-[0_0_10px_#F63700]" : "w-6 bg-white/20 hover:bg-white/40"
-            }`}
-          />
-        ))}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center justify-center w-full max-w-4xl px-4 z-30">
+        <div className="relative flex items-center justify-center gap-2 w-full">
+          {/* Background Lines */}
+          <div className="absolute inset-0 flex items-center justify-between px-20 -z-10 opacity-30">
+            {movies.map((_, i) => (
+              <div 
+                key={i}
+                className={`flex-1 h-[2px] mx-1 transition-all duration-700 ${
+                  i === current ? "bg-primary scale-x-125" : "bg-white/30"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-12">
+            <button
+              onClick={() => setCurrent((prev) => (prev - 1 + movies.length) % movies.length)}
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all active:scale-90 group"
+              aria-label="Previous movie"
+            >
+              <motion.span
+                animate={{ x: [0, -2, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ArrowLeft size={24} className="text-white opacity-60 group-hover:opacity-100" />
+              </motion.span>
+            </button>
+
+            <div className="flex gap-4">
+              {movies.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`h-1.5 rounded-full transition-all duration-500 hover:scale-y-150 ${
+                    i === current 
+                      ? "w-10 bg-primary shadow-[0_0_15px_#F63700]" 
+                      : "w-6 bg-white/20 hover:bg-white/50"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => setCurrent((prev) => (prev + 1) % movies.length)}
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-white/40 transition-all active:scale-90 group"
+              aria-label="Next movie"
+            >
+              <motion.span
+                animate={{ x: [0, 2, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ArrowRight size={24} className="text-white opacity-60 group-hover:opacity-100" />
+              </motion.span>
+            </button>
+          </div>
+        </div>
       </div>
       
       <style>{`

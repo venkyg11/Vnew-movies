@@ -38,7 +38,7 @@ const MovieDetails = () => {
         <div className="absolute inset-0 bg-background/40" />
       </div>
 
-      <div className="-mt-80 relative z-10 max-w-[1440px] mx-auto px-4 md:px-8">
+      <div className="-mt-96 relative z-10 max-w-[1440px] mx-auto px-4 md:px-8">
         <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6 text-sm">
           <ArrowLeft size={16} />
           {t.back}
@@ -151,7 +151,7 @@ const MovieDetails = () => {
           </motion.div>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-4">
           <MovieSlider title={t.youMayAlsoLike} movies={similar} />
         </div>
       </div>

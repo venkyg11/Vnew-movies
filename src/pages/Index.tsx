@@ -24,7 +24,7 @@ const Index = () => {
       <Navbar />
       <HeroSection movies={heroMovies} />
 
-      <div className="relative z-10 space-y-8 pb-20 overflow-hidden">
+      <div className="relative z-10 -mt-20 space-y-2 pb-10 overflow-hidden">
         <MovieSlider
           title="⭐ Recommended For You"
           movies={getRecommended()}
